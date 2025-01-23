@@ -1,16 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Edit User</h1>
+<div class="container mt-4">
+<h1 class="mb-4 text-danger font-weight-bold text-center">{{ __('Edit User') }}</h1>
 <form method="POST" action="{{ route('admin.users.update', $user['id']) }}">
     @csrf
     @method('PUT')
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" value="{{ $user['name'] }}" required>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="{{ $user['email'] }}" required>
+    <div class="form-group mb-3">
+    <label for="name">{{ __('Name') }}:</label>
+    <input class="form-control" type="text" id="name" name="name" value="{{ $user['name'] }}" required>
+    </div>
 
-    <button type="submit">Update</button>
+    <div class="form-group mb-3">
+    <label for="email">{{ __('Email') }}:</label>
+    <input class="form-control" type="email" id="email" name="email" value="{{ $user['email'] }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">{{ __('Update User') }}</button>
 </form>
+</div>
 @endsection

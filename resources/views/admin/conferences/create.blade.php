@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <h1>{{ __('Create Conference') }}</h1>
+    <h1 class="mb-4 text-danger font-weight-bold text-center">{{ __('Create Conference') }}</h1>
 
     <form method="POST" action="{{ route('admin.conferences.store') }}">
         @csrf
