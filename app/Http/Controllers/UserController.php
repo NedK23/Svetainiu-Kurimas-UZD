@@ -32,7 +32,6 @@ class UserController extends Controller
             ['id' => 3, 'title' => 'AI Summit', 'description' => 'Learn about AI advancements.', 'date' => '2024-07-20', 'location' => 'AI City'],
         ];
 
-        // Find the conference by its 'id' field.
         $conference = collect($conferences)->firstWhere('id', $id);
 
         if (!$conference) {

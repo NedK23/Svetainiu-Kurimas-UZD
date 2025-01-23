@@ -1,16 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>User Management</h1>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+
     <tbody>
         @foreach ($users as $user)
         <tr>

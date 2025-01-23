@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <h1 class="mb-4 text-danger font-weight-bold text-center">{{ __('Edit Conference') }}</h1>
 
-    <form method="POST" action="{{ route('admin.conferences.update', $id) }}">
+    <form method="POST" action="{{ route('admin.users.update', $id) }}">
         @csrf
         @method('PUT')
 
