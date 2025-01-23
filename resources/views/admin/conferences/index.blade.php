@@ -37,15 +37,15 @@
                     <tbody>
                         @foreach ($conferences as $conference)
                         <tr>
-                            <td>{{ $conference['id'] }}</td>
-                            <td>{{ $conference['title'] }}</td>
-                            <td>{{ $conference['description'] }}</td>
-                            <td>{{ $conference['date'] }}</td>
+                            <td>{{ $conference->id }}</td>
+                            <td>{{ $conference->title }}</td>
+                            <td>{{ $conference->description }}</td>
+                            <td>{{ $conference->date }}</td>
                             <td>
-                                <a href="{{ route('admin.conferences.edit', $conference['id']) }}" class="btn btn-outline-warning btn-sm">
+                                <a href="{{ route('admin.conferences.edit', $conference->id) }}" class="btn btn-outline-warning btn-sm">
                                     <i class="bi bi-pencil-square"></i> {{ __('Edit') }}
                                 </a>
-                                <form method="POST" action="{{ route('admin.conferences.destroy', $conference['id']) }}" style="display:inline-block;">
+                                <form method="POST" action="{{ route('admin.conferences.destroy', $conference->id) }}" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger btn-sm">

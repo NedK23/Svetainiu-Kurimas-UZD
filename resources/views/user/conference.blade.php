@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+<!-- Conference list -->
+<!-- Data pulled from DB (database.sqlite) -->
+<!-- Seeded by ConferenceSeeder -->
+
 @section('content')
 <div class="container mt-4">
     <h1 class="mb-4 text-center">{{ __('All Conferences') }}</h1>

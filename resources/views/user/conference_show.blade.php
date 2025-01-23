@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
+<!-- Conference details -->
+<!-- Data pulled from DB (database.sqlite) -->
+<!-- Seeded by ConferenceSeeder -->
+
 @section('content')
     <div class="container mt-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white">
-                <h1 class="card-title text-center">{{ $conference['title'] }}</h1>
+                <h1 class="card-title text-center">{{ $conference->title }}</h1>
             </div>
             <div class="card-body">
                 <div class="row">

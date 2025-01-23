@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Conference;
 
 class ConferenceController extends Controller
 {
 
     public function index()
     {
-        $conferences = session('conferences', [
-            1 => ['id' => 1, 'title' => 'Tech Conference 2024', 'description' => 'Explore new technologies.', 'date' => '2024-06-15', 'location' => 'Tech City'],
-            2 => ['id' => 2, 'title' => 'AI Summit', 'description' => 'Learn about AI advancements.', 'date' => '2024-07-20', 'location' => 'AI City'],
-        ]);
+        //Conference list
+
+        $conferences = Conference::all();
 
         return view('admin.conferences.index', compact('conferences'));
     }
@@ -21,85 +21,73 @@ class ConferenceController extends Controller
 
     public function create()
     {
+
+    //Conference Creation
+    //Redirects admin to the creation panel (create.blade.php)
+    //Data gets inserted into DB (database.sqlite)
+
         return view('admin.conferences.create');
     }
 
     public function store(Request $request)
 {
+    //Conference Creation
+    //Stores data into DB (database.sqlite)
+
     $validated = $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'required|string',
         'date' => 'required|date',
+        'location' => 'required|string|max:255',
     ]);
 
-    $conferences = session('conferences', []);
-    $newConference = [
-        'id' => count($conferences) + 1,
-        'title' => $validated['title'],
-        'description' => $validated['description'],
-        'date' => $validated['date'],
-    ];
-
-    $conferences[] = $newConference;
-    session(['conferences' => $conferences]);
-
-    return redirect()->route('admin.conferences.index')->with('success', 'Conference created successfully!');
+    Conference::create($validated);
+    return redirect()->route('admin.conferences.index');
 }
 
 
 public function edit($id)
 {
-    $conferences = session('conferences', []);
-    $conference = collect($conferences)->firstWhere('id', $id);
+    //Conference Editing
 
-    if (!$conference) {
-        abort(404, 'Conference not found');
-    }
+    $conference = Conference::findOrFail($id);
+    return view('admin.conferences.edit', compact('conference'));
 
-    return view('admin.conferences.edit', compact('conference', 'id'));
 }
 
 public function update(Request $request, $id)
 {
+
+    //Updates the conference with inputed data from the edit page.
+    //Data gets updated and replaced with new conference data.
+
     $validated = $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'required|string',
         'date' => 'required|date',
+        'location' => 'required|string|max:255',
     ]);
 
-    $conferences = session('conferences', []);
-    foreach ($conferences as &$conference) {
-        if ($conference['id'] == $id) {
-            $conference['title'] = $validated['title'];
-            $conference['description'] = $validated['description'];
-            $conference['date'] = $validated['date'];
-            break;
-        }
-    }
+    $conference = Conference::findOrFail($id);
+    $conference->update($validated);
 
-    session(['conferences' => $conferences]);
-
-    return redirect()->route('admin.conferences.index')->with('success', 'Conference updated successfully!');
+    return redirect()->route('admin.conferences.index');
 }
+
+// Conference data deletion function.
+
 public function destroy($id)
 {
+    $conference = Conference::findOrFail($id);
 
-    $conferences = session('conferences', []);
-    $conference = collect($conferences)->firstWhere('id', $id);
+    // Dissalow the deletion of past conferences
 
-    if (!$conference) {
-        return redirect()->route('admin.conferences.index')->with('error', 'Conference not found.');
+    if (now()->greaterThan($conference->date)){
+        return redirect()->route('admin.conferences.index');
     }
-    if (now()->greaterThan($conference['date'])) {
-        return redirect()->route('admin.conferences.index')->with('error', 'Cannot delete past conferences.');
-    }
-    $conferences = array_filter($conferences, function ($item) use ($id) {
-        return $item['id'] != $id;
-    });
 
-    session(['conferences' => $conferences]);
-
-    return redirect()->route('admin.conferences.index')->with('success', 'Conference deleted successfully!');
+    $conference->delete();
+    return redirect()->route('admin.conferences.index');
 }
 }
 
