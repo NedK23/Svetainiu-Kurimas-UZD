@@ -12,15 +12,15 @@
                         <h4 class="mb-4 text-secondary">{{ __('Conference Details') }}</h4>
                         <p class="card-text">
                             <strong class="text-dark">{{ __('Description') }}:</strong>
-                            {{ $conference['description'] }}
+                            {{ $conference->description }}
                         </p>
                         <p class="card-text">
                             <strong class="text-dark">{{ __('Date') }}:</strong>
-                            <span class="badge bg-info text-dark">{{ $conference['date'] }}</span>
+                            <span class="badge bg-info text-dark">{{ $conference->date }}</span>
                         </p>
                         <p class="card-text">
                             <strong class="text-dark">{{ __('Location') }}:</strong>
-                            {{ $conference['location'] }}
+                            {{ $conference->location }}
                         </p>
                     </div>
                     <div class="col-lg-4 col-md-5 text-center">

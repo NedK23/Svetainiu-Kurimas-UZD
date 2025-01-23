@@ -6,6 +6,7 @@ use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\ConferenceController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Models\Conference;
 //use App\Http\Controllers\MainConferenceController;
 
 
