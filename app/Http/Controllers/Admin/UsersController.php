@@ -4,29 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UsersController extends Controller
 {
 
     public function index()
     {
-        $users = session('users', [
-            ['id' => 1, 'name' => 'Name Surname', 'email' => 'NameSurname@example.com'],
-            ['id' => 2, 'name' => 'Name Surname2', 'email' => 'NameSurname2@example.com'],
-        ]);
-        session(['users' => $users]);
+        $users = User::with('roles')->get();
         return view('admin.users.index', compact('users'));
     }
 
 
     public function edit($id)
     {
-        $users = session('users', []);
-        $user = collect($users)->firstWhere('id', $id);
-        if (!$user) {
-            abort(404, 'User not found');
-        }
-        return view('admin.users.edit', compact('user', 'id'));
+        $user = User::findOrFail($id);
+        $roles = ['client','worker','admin'];
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, $id)
@@ -34,17 +28,15 @@ class UsersController extends Controller
         $valid = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'roles' => 'required|string|in:client,worker,admin',
         ]);
-        $users = session('users', []);
 
-        foreach($users as &$user){
-            if($user['id'] == $id){
-                $user['name'] = $valid['name'];
-                $user['email'] = $valid['email'];
-                break;
-            }
-        }
-        session(['users' => $users]);
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $valid['name'],
+            'email' => $valid['email'],
+        ]);
+        $user->roles()->sync([$valid['role']]);
         return redirect()->route('admin.users.index');
     }
 

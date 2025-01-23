@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <!-- BRAND -->
-            <a class="navbar-brand" href="{{ route('main') }}">{{ __('Conference Sistem') }}</a>
+            <a class="navbar-brand" href="{{ route('index') }}">{{ __('Conference Sistem') }}</a>
 
             <!-- NAVBAR -->
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -22,12 +22,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('conference') }}">{{ __('Client') }}</a>
                     </li>
+                    
+                    @if(in_array(session('user_role'), ['worker', 'admin']))
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('worker.conferences') }}">{{ __('Worker') }}</a>
                     </li>
+                    @endif
+
+                    @if(in_array(session('user_role'), ['worker', 'admin']))
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.index') }}">{{ __('Admin') }}</a>
                     </li>
+                    @endif
+
                 </ul>
 
                 <!-- RIGHT SIDE -->
@@ -35,7 +42,8 @@
                      @if(session('name') && session('surname'))
                     <li class="nav-item d-flex justify-content-center">
                         <span class="navbar-text text-light">
-                            {{ session('name') }} {{ session('surname') }}
+                            <!-- TODO -->
+                            <p>{{ session('user_name', 'Name') }} {{ session('user_surname', 'Surname') }}</p>
                         </span>
                     </li>
                 @endif
@@ -55,7 +63,7 @@
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="btn btn-outline-danger disabled">{{ __('Logout') }}</button>
+                            <button type="submit" class="btn btn-outline-danger">{{ __('Logout') }}</button>
                         </form>
                     </li>
                 </ul>
