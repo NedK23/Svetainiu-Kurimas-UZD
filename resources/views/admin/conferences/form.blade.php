@@ -3,13 +3,13 @@
     @isset($conference)
         @method('PUT')
     @endisset
-    <label for="title">Title:</label>
+    <label for="title">{{ __('Title') }}</label>
     <input type="text" id="title" name="title" value="{{ $conference['title'] ?? '' }}" required>
 
-    <label for="description">Description:</label>
+    <label for="description">{{ __('Description') }}</label>
     <textarea id="description" name="description" required>{{ $conference['description'] ?? '' }}</textarea>
 
-    <label for="date">Date:</label>
+    <label for="date">{{ __('Date') }}</label>
     <input type="date" id="date" name="date" value="{{ $conference['date'] ?? '' }}" required>
 
     <button type="submit">{{ isset($conference) ? 'Update' : 'Create' }}</button>

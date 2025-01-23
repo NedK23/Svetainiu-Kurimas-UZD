@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Conferences</h1>
+<h1>{{ __('Conferences') }}</h1>
 <table class="table">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Action</th>
+            <th>{{ __('Title') }}</th>
+            <th>{{ __('Description') }}</th>
+            <th>{{ __('Date') }}</th>
+            <th>{{ __('Location') }}</th>
+            <th>{{ __('Action') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
                 <td>{{ $conference['date'] }}</td>
                 <td>{{ $conference['location'] }}</td>
                 <td>
-                    <a href="{{ route('worker.conference.show', $conference['id']) }}" class="btn btn-info">View Details</a>
+                    <a href="{{ route('worker.conference.show', $conference['id']) }}" class="btn btn-info">{{ __('View Details') }}</a>
                 </td>
             </tr>
         @endforeach

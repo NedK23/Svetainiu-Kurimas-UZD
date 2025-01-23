@@ -9,11 +9,11 @@
 @section('content')
 
 <div class="container mt-5">
-    <h1 class="mb-4">Conference Management</h1>
+    <h1 class="mb-4">{{ __('Conference Management') }}</h1>
 
     <div class="mb-3">
         <a href="{{ route('admin.conferences.create') }}" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Create New Conference
+            <i class="bi bi-plus-circle"></i> {{ __('Create New Conference') }}
         </a>
     </div>
 
@@ -22,9 +22,9 @@
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
-                    <th>Date</th>
-                    <th>Actions</th>
+                    <th>{{ __('Title') }}</th>
+                    <th>{{ __('Date') }}</th>
+                    <th>{{ __('Actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,13 +35,13 @@
                     <td>{{ $conference['date'] }}</td>
                     <td>
                         <a href="{{ route('admin.conferences.edit', $conference['id']) }}" class="btn btn-warning btn-sm">
-                            <i class="bi bi-pencil-square"></i> Edit
+                            <i class="bi bi-pencil-square"></i> {{ __('Edit') }}
                         </a>
                         <form method="POST" action="{{ route('admin.conferences.destroy', $conference['id']) }}" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this conference?');">
-                                <i class="bi bi-trash"></i> Delete
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> {{ __('Delete') }}
                             </button>
                         </form>
                     </td>

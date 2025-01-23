@@ -12,19 +12,19 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <!-- BRAND -->
-            <a class="navbar-brand" href="{{ route('main') }}">Konferencijų sistema</a>
+            <a class="navbar-brand" href="{{ route('main') }}">{{ __('Conference Sistem') }}</a>
 
             <!-- NAVBAR -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('conference') }}">Klientas</a>
+                        <a class="nav-link" href="{{ route('conference') }}">{{ __('Client') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('worker.conferences') }}">Klientas</a>
+                        <a class="nav-link" href="{{ route('worker.conferences') }}">{{ __('Worker') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.index') }}">Administratorius</a>
+                        <a class="nav-link" href="{{ route('admin.index') }}">{{ __('Admin') }}</a>
                     </li>
                 </ul>
 
@@ -63,10 +63,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        let currentLocale = "{{ app()->getLocale() }}";
-        console.log('Current Locale:', currentLocale);
-    </script>
 
 </body>
 </html>

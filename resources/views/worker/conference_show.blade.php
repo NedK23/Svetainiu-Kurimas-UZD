@@ -3,16 +3,16 @@
 @section('content')
 <h1>{{ $conference['title'] }}</h1>
 <p>{{ $conference['description'] }}</p>
-<p>Date: {{ $conference['date'] }}</p>
-<p>Location: {{ $conference['location'] }}</p>
+<p>{{ __('Date') }}: {{ $conference['date'] }}</p>
+<p>{{ __('Location') }}: {{ $conference['location'] }}</p>
 
-<h3>Registered Users</h3>
+<h3>{{ __('Registered Users') }}</h3>
 @if (count($registrations) > 0)
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Surname</th>
+                <th>{{ __('Name') }}</th>
+                <th>{{ __('Surname') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +25,6 @@
         </tbody>
     </table>
 @else
-    <p>No users have registered for this conference yet.</p>
+    <p>{{ __('No users have registered for this conference yet.') }}</p>
 @endif
 @endsection

@@ -9,8 +9,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $conference['title'] }}</h5>
-                            <p class="card-text">Date: {{ $conference['date'] }}</p>
-                            <a href="{{ route('user.conference.show', $conference['id']) }}" class="btn btn-primary">More Info</a>
+                            <p class="card-text">{{ __(key: 'Date') }}: {{ $conference['date'] }}</p>
+                            <a href="{{ route('user.conference.show', $conference['id']) }}" class="btn btn-primary">{{ __(key: 'More Info') }}</a>
                         </div>
                     </div>
                 </div>
