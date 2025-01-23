@@ -24,4 +24,13 @@ class User extends Authenticatable
 
         return $this->roles->pluck('name')->contains($roles);
     }
+    protected static function boot()
+{
+    parent::boot();
+
+    static::deleting(function ($user) {
+        $user->roles()->detach();
+    });
+}
+
 }

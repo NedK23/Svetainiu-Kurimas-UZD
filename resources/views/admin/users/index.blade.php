@@ -32,7 +32,9 @@
                         <tr>
                             <th>{{ __('ID') }}</th>
                             <th>{{ __('Name') }}</th>
+                            <th>{{ __('Surname') }}</th>
                             <th>{{ __('Email') }}</th>
+                            <th>{{ __('Group') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
@@ -41,9 +43,19 @@
                         <tr>
                             <td>{{ $user['id'] }}</td>
                             <td>{{ $user['name'] }}</td>
+                            <td>{{ $user['surname'] }}</td>
                             <td>{{ $user['email'] }}</td>
+                            <td>{{ $user->roles->pluck('name')}}</td>
                             <td>
-                                <a class="btn btn-outline-warning btn-sm" href="{{ route('admin.users.edit', $user['id']) }}">{{ __('Edit') }}</a>
+                                <a class="btn btn-outline-warning btn-sm" href="{{ route('admin.users.edit', $user->id) }}">{{ __('Edit') }}</a>
+
+                                <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                         {{ __('Delete') }}
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

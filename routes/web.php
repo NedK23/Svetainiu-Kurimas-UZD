@@ -47,6 +47,7 @@ Route::middleware('role:admin')->group(function () {
     Route::get('users', [UsersController::class, 'index'])->name('admin.users.index');
     Route::get('users/{id}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
     Route::put('users/{id}', [UsersController::class, 'update'])->name('admin.users.update');
+    Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 
     // ADMIN PAGE
 
