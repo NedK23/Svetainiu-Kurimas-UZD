@@ -30,10 +30,14 @@
                     <div class="col-lg-4 col-md-5 text-center">
                         <br>
                         <br>
-                        <form method="POST" action="{{ route('user.conference.register', $conference['id']) }}">
+                        @if($IsRegistered)
+                        <p>You are already registered for this conference.</p>
+                        @else
+                        <form method="POST" action="{{ route('user.conference.register', $conference->id) }}">
                             @csrf
                             <button type="submit" class="btn btn-success btn-lg btn-block">{{ __('Register') }}</button>
                         </form>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Conference;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,26 +23,20 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $conference = Conference::find($id);
+        $conference = Conference::findOrFail($id);
 
         if (!$conference) {
             abort(404, 'Conference not found.');
         }
-
-        return view('user.conference_show', compact('conference'));
+        $IsRegistered = $conference->users->contains(Auth::id());
+        return view('user.conference_show', compact('conference','IsRegistered'));
     }
 
-    public function register(Request $request, $id)
-    {
-        $name = session('name', 'Name');
-        $surname = session('surname', 'Surname');
-        $registrations = session("conference_{$id}_registrations", []);
-
-        $registrations[] = ['name' => $name, 'surname' => $surname];
-
-        session(["conference_{$id}_registrations" => $registrations]);
-
-        return redirect()->route('user.conference.show', $id)
-                         ->with('success', 'You have successfully registered for the conference!');
+    public function register($id){
+        $conference = Conference::findOrFail($id);
+        if(!$conference->users->contains(Auth::id())){
+            $conference->users()->attach(Auth::id());
+        }
+        return redirect()->route('user.conference.show',$id);
     }
 }

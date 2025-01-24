@@ -65,7 +65,7 @@
                                 <td>{{ $conference['date'] }}</td>
                                 <td>{{ $conference['location'] }}</td>
                                 <td>
-                                    <a href="{{ route('worker.conference.show', $conference['id']) }}" class="btn btn-outline-secondary">{{ __('View Details') }}</a>
+                                    <a href="{{ route('worker.conference.show', $conference->id) }}" class="btn btn-outline-secondary">{{ __('View Details') }}</a>
                                 </td>
                             </tr>
                         @endif

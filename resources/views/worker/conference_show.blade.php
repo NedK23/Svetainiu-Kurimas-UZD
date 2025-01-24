@@ -15,7 +15,7 @@
 
     <div class="mt-5">
         <h3 class="text-secondary">{{ __('Registered Users') }}</h3>
-        @if (count($registrations) > 0)
+        @if ($registration && count($registration) > 0)
             <table class="table table-striped table-hover mt-3">
                 <thead class="table-dark">
                     <tr>
@@ -24,10 +24,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($registrations as $registration)
+                    @foreach ($registration as $user)
                         <tr>
-                            <td>{{ $registration['name'] }}</td>
-                            <td>{{ $registration['surname'] }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->surname  }}</td>
                         </tr>
                     @endforeach
                 </tbody>
